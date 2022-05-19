@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
     <Resource
-            driverClassName="com.mysql.cj.jdbc.Driver"
-            maxActive="4"
-            maxIdle="2"
-            maxWait="5000"
             name="jdbc/repairStudio"
+            auth="Container"
+            description="DB Connection"
+            driverClassName="com.mysql.cj.jdbc.Driver"
+            maxActive="10"
+            maxIdle="30"
+            maxTotal="100"
+            maxWait="4000"
+            maxPoolSize="50"
+            minPoolSize="0"
             username="root"
             password="ne_pro_100_isys"
             type="javax.sql.DataSource"

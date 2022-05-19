@@ -3,7 +3,7 @@ package com.example.finalrepairstudio.controller.command.common;
 import com.example.finalrepairstudio.controller.command.Command;
 import com.example.finalrepairstudio.model.DAO.UserDAO;
 import com.example.finalrepairstudio.model.entity.User;
-import com.example.finalrepairstudio.model.entity.UserBuilder;
+import com.example.finalrepairstudio.model.entity.BuilderUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ public class RegisterCommand implements Command {
 
         UserDAO userDAO = new UserDAO();
 
-        User user = new UserBuilder()
+        User user = new BuilderUser()
                 .setPassword(password)
                 .setEmail(email)
                 .setFirstname(firstname)
@@ -34,16 +34,8 @@ public class RegisterCommand implements Command {
                 .build();
 
         userDAO.insert(user);
-        userDAO.getId(user);
-        userDAO.insertBalance(user);
-        PrintWriter out = null;
-        try {
-            out = response.getWriter();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        out.println("<html><body><b>Successfully Inserted"
-                + "</b></body></html>");
+
+
         return "redirect:controller?action=home";
     }
 }

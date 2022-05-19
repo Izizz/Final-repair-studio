@@ -1,9 +1,14 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<fmt:requestEncoding value="UTF-8" />
+<fmt:setLocale value="${sessionScope.lang}" />
+<fmt:setBundle basename="messages" var="lang"/>
+<%@include file="/includes/header.jsp"%>
 <html>
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Login</title>
+    <title><fmt:message key="login" bundle="${lang}"/></title>
 </head>
 <body>
 <form action="controller?action=login" method="post" >
@@ -15,24 +20,24 @@
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
 
-                        <h3 class="mb-5">Sign in</h3>
+                        <h3 class="mb-5"><fmt:message key="sing.in" bundle="${lang}"/></h3>
 
                         <div class="form-outline mb-4">
-                            <input type="email" name = "email" id="typeEmailX-2" class="form-control form-control-lg" />
-                            <label class="form-label" for="typeEmailX-2">Email</label>
+                            <input type="email" name = "email" id="typeEmailX-2" class="form-control form-control-lg" required="required"/>
+                            <label class="form-label" for="typeEmailX-2"><fmt:message key="email" bundle="${lang}"/></label>
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="password" name = "password" id="typePasswordX-2" class="form-control form-control-lg" />
-                            <label class="form-label" for="typePasswordX-2">Password</label>
+                            <input type="password" name = "password" id="typePasswordX-2"  class="form-control form-control-lg" required="required" />
+                            <label class="form-label" for="typePasswordX-2"><fmt:message key="password" bundle="${lang}"/></label>
                         </div>
 
 
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit"><fmt:message key="login" bundle="${lang}"/></button>
 
 
                         <div>
-                            <p class="mb-0">Don't have an account? <a href="controller?action=registerpage" class="text-black-50 fw-bold">Sign Up</a></p>
+                            <p class="mb-0"><fmt:message key="dont.have.account" bundle="${lang}"/> <a href="controller?action=registerpage" class="text-black-50 fw-bold"><fmt:message key="sign.up" bundle="${lang}"/></a></p>
                         </div>
 
 

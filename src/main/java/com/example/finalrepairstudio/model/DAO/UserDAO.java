@@ -1,24 +1,35 @@
 package com.example.finalrepairstudio.model.DAO;
 
 import com.example.finalrepairstudio.model.entity.User;
-import com.example.finalrepairstudio.model.entity.UserBuilder;
+import com.example.finalrepairstudio.model.entity.BuilderUser;
 import com.example.finalrepairstudio.model.utils.SQL_Queries;
 
+import org.apache.log4j.Logger;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+
 import java.sql.*;
-
+import java.util.ArrayList;
+import java.util.List;
+/**
+ * User DAO implements for JDBC
+ */
 public class UserDAO {
+    private static final Logger log  = Logger.getLogger(String.valueOf(UserDAO.class));
+
+    private int noOfRecords ;
+
+    public int getNoOfRecords() {
+        return noOfRecords;
+    }
+
 
     public String insert(User user)  {
         String result  = "DATA entered successfully";
 
         try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DBManager.getConnection();
+            log.debug("Inserting user into database");
+
+            Connection connection = DBManager.getInstance().getConnection();
 
             String query = SQL_Queries.ADD_USER;
             PreparedStatement ps = connection.prepareStatement(query);
@@ -29,13 +40,12 @@ public class UserDAO {
             ps.setString(5,user.getPhonenumber());
 
 
-
             ps.executeUpdate();
 
-            connection.close();
-            ps.close();
+
 
         } catch (SQLException  e) {
+            log.error(e);
             e.printStackTrace();
             result = "Data was not entered";
         }
@@ -45,48 +55,29 @@ public class UserDAO {
 
     public int getId(User user){
         String sql = SQL_Queries.GET_USER_ID;
-        User newUser = null;
+        User newUser = new User();
         String email = user.getEmail();
         try{
-            Connection connection = DBManager.getConnection();
+            Connection connection = DBManager.getInstance().getConnection();
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1,email);
             ResultSet rs= ps.executeQuery();
             while (rs.next()){
-                 newUser = new UserBuilder()
+                 newUser = new BuilderUser()
                         .setId(rs.getInt("user_id"))
                         .build();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        assert newUser != null;
         return newUser.getId();
     }
 
-    public String insertBalance(User user){
-        String result  = "DATA entered successfully";
-
-        try {
-            Connection connection = DBManager.getConnection();
-
-            PreparedStatement ps = connection.prepareStatement(SQL_Queries.ADD_USER_BALANCE);
-            ps.setInt(1,user.getId());
-            ps.executeUpdate();
-
-            connection.close();
-            ps.close();
-        }catch (SQLException e) {
-            e.printStackTrace();
-            result = "Data was not entered";
-        }
-        return result;
-    }
 
     public String validate(User user){
 
-        String query = SQL_Queries.FIND_USER;
+        String query = SQL_Queries.FIND_LOGIN;
 
 
         String email  = user.getEmail();
@@ -94,8 +85,8 @@ public class UserDAO {
 
 
         try{
-
-            Connection connection = DBManager.getConnection();
+            log.debug("User validation starts");
+            Connection connection = DBManager.getInstance().getConnection();
 
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1,user.getEmail());
@@ -115,26 +106,28 @@ public class UserDAO {
                 else if(email.equals(useremailDB) && password.equals(passwordDB) && roleDB.equals("user"))
                     return "User";
             }
+            log.debug("User validation finished");
+
             connection.close();
             ps.close();
 
         }catch (SQLException e ) {
+            log.error(e);
             e.printStackTrace();
         }
-
 
         return "Invalid user credentials";
     }
 
     public User findUser(User user) throws SQLException {
-        Connection connection= DBManager.getConnection();
+        Connection connection= DBManager.getInstance().getConnection();
         User newUser = null;
-        PreparedStatement ps = connection.prepareStatement(SQL_Queries.FIND_USER);
+        PreparedStatement ps = connection.prepareStatement(SQL_Queries.FIND_LOGIN);
         ps.setString(1,user.getEmail());
         ps.setString(2,user.getPassword());
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
-            newUser = new UserBuilder()
+            newUser = new BuilderUser()
                     .setId(rs.getInt("user_id"))
                     .setFirstname(rs.getString("firstname"))
                     .setLastname(rs.getString("lastname"))
@@ -148,4 +141,57 @@ public class UserDAO {
 
     }
 
+    public double getBalance(int user_id) throws SQLException{
+        Connection connection = DBManager.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(SQL_Queries.GET_BALANCE);
+        ps.setInt(1,user_id);
+        ResultSet rs = ps.executeQuery();
+        double balance = 0;
+        while (rs.next()) {
+             balance = rs.getDouble("balance");
+        }
+        return balance;
+    }
+
+    public void TopupBalance(int user_id,double balance) throws SQLException{
+        Connection connection = DBManager.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(SQL_Queries.UPDATE_BALANCE);
+        ps.setDouble(1,getBalance(user_id)+balance);
+        ps.setInt(2,user_id);
+        ps.executeUpdate();
+
+    }
+
+    public List<User> getUserBalance (String sql,int offset,int noOfRecords) throws SQLException{
+        List <User> userList = new ArrayList<>();
+        Connection connection = DBManager.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql + offset + ", " + noOfRecords);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            User user = new BuilderUser()
+                    .setId(rs.getInt("user_id"))
+                    .setFirstname(rs.getString("firstname"))
+                    .setLastname(rs.getString("lastname"))
+                    .setBalance(rs.getDouble("balance"))
+                    .build();
+            userList.add(user);
+        }
+        rs.close();
+
+        rs = ps.executeQuery("SELECT FOUND_ROWS()");
+        if (rs.next()) {
+            this.noOfRecords = rs.getInt(1);
+        }
+
+        connection.close();
+        return  userList;
+
+    }
+
+//    public void deleteUser(String email) throws  SQLException{
+//        try {
+//         Connection connection  =  DBManager.getInstance().getConnection();
+//         PreparedStatement ps = connection.prepareStatement();
+//        }
+//    }
 }

@@ -5,15 +5,25 @@
 <%@ page import="com.example.finalrepairstudio.model.utils.SQL_Queries" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<%@include file="/includes/header.jsp"%>
 <html>
+<style>
+    body {
+        background-image: url('images/unnamed.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+</style>
 <head>
     <title>RepairStudio</title>
 </head>
 <body>
 <%--<%@include file="/includes/header.jsp" %>--%>
-<%@include file="/includes/header.jsp"%>
-<a href = "controller?action=user-makeorder">Make order</a>
 
+<div class="container" style="text-align: center" >
+<a href = "controller?action=user-makeorder" ><fmt:message key="make.order" bundle="${lang}"/></a>
+</div>
 
 </body>
 </html>

@@ -1,5 +1,10 @@
 package com.example.finalrepairstudio.model.entity;
 
+/**
+ * Master entity class.
+ *
+ * @author Aleksey Serdyukov.
+ */
 public class Master {
      String firstname, lastname,email,phone,password;
      String status = "0";

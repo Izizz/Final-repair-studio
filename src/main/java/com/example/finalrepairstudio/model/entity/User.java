@@ -1,9 +1,15 @@
 package com.example.finalrepairstudio.model.entity;
 
+/**
+ * User entity class.
+ *
+ * @author Ostap Semotiuk.
+ */
+
 public class User {
     int id;
     double balance;
-     String password,email,role,firstname,lastname,phonenumber;
+    String password,email,role,firstname,lastname,phonenumber;
 
     public String getEmail() {
         return email;
@@ -26,7 +32,6 @@ public class User {
     public int getId() {
         return id;
     }
-
     public double getBalance() {
         return balance;
     }

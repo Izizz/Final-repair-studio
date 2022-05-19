@@ -9,7 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.finalrepairstudio.model.utils.Pages.MAKEORDER;
 import static com.example.finalrepairstudio.model.utils.Pages.loginPage;
-
+/**
+ * Making orders for user  command.
+ *
+ * @author Ostap Semotiuk
+ */
 public class MakeOrderCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
@@ -19,6 +23,5 @@ public class MakeOrderCommand implements Command {
         }else{
             return MAKEORDER;
         }
-        
     }
 }

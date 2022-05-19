@@ -1,11 +1,4 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ostap
-  Date: 4/6/2022
-  Time: 11:16 AM
-  To change this template use File | Settings | File Templates.
---%>
 
 
 <fmt:requestEncoding value="UTF-8" />
@@ -14,14 +7,14 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title><fmt:message key="repair.studio" bundle="${lang}"/></title>
 </head>
 <body>
 
 <div class="header">
     <a href="controller?action=home" class="logo"><fmt:message key="repair.studio" bundle="${lang}"/> </a>
-    <a href="?locale=uk">UKR</a>
-    <a href="?locale=en">En</a>
+    <a href="controller?action=change-language&locale=uk">UKR</a>
+    <a href="controller?action=change-language&locale=en">En</a>
 
     <div class="header-right">
         <% if (session.getAttribute("role") != null){%>
@@ -42,18 +35,18 @@
 
         <%if(session.getAttribute("firstname") == null){%>
 
-        <a class="active" href="controller?action=login">Login</a>
+        <a class="active" href="controller?action=login"><fmt:message key="login" bundle="${lang}"/></a>
         <%}else{%>
-        <a class="active" href="controller?action=logout">Logout</a>
+        <a class="active" href="controller?action=logout"><fmt:message key="logout" bundle="${lang}"/></a>
         <%}%>
-        <a href="">About</a>
+
     </div>
 </div>
 
 <style type="text/css">
     .header {
         overflow: hidden;
-        background-color: dodgerblue;
+        /*background-color: opacity;*/
         padding: 20px 10px;
         /*width: 100%;*/
         margin: -10px -10px 0 -10px;

@@ -1,41 +1,48 @@
 package com.example.finalrepairstudio.model.entity;
 
 import java.sql.Date;
-
+/**
+ * Order entity class.
+ *
+ * @author Aleksey Serdyukov.
+ */
 public class OrderRequest {
-     Long requestId;
+     int requestId;
      int  user_id;
      String requestDescr;
-     int master_id;
+     String master;
      double price;
-     Date requestDate;
+     String feedback;
+
+
+
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    Date requestDate;
+
      Boolean isDenied;
      String status;
     public double getPrice() {
         return price;
     }
-
-
-
     public String getStatus() {
         return status;
     }
-
-    public Long getRequestId() {
+    public int getRequestId() {
         return requestId;
     }
     public int getUser() {
         return user_id;
     }
-    public int getMaster() {
-        return master_id;
+    public String getMaster() {
+        return master;
     }
-
     public String getRequestDescr() {
         return requestDescr;
     }
-
-
     public Date getRequestDate() {
         return requestDate;
     }
