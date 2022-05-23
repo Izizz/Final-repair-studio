@@ -108,6 +108,45 @@ public class OrderDAO {
         return list;
     }
 
+    public OrderRequest getOrder(String desr) throws SQLException {
+            OrderRequest order = null;
+            Connection  connection  = DBManager.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_ORDER);
+            ps.setString(1,desr);
+            ResultSet rs =ps.executeQuery();
+            while(rs.next()){
+                 order = new BuilderOrderRequest()
+                         .setRequestId(rs.getInt("id"))
+                        .setUserId(rs.getInt("user_id"))
+                        .setRequestDescr(rs.getString("description"))
+                        .setPrice(rs.getDouble("price"))
+                        .setMaster(rs.getString("master"))
+                        .setStatus(rs.getString("status"))
+                        .setRequestDate(rs.getDate("date"))
+                        .build();
+            }
+
+        rs.close();
+        connection.close();
+        return order;
+
+    }
+
+    public void DeleteOrder(int id) {
+        String sql = "call deleteOrder( " + id + ")";
+        try {
+            Connection connection = DBManager.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            int update = ps.executeUpdate();
+            if (update > 0) {
+                log.debug("Order was deleted successfully");
+                return;
+            }
+            connection.close();
+        } catch (SQLException e) {
+            log.error(e);
+        }
+    }
 
     public  void addOrder(OrderRequest orderRequest){
         try {

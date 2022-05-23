@@ -22,7 +22,6 @@ public class UserDAO {
         return noOfRecords;
     }
 
-
     public String insert(User user)  {
         String result  = "DATA entered successfully";
 
@@ -52,28 +51,6 @@ public class UserDAO {
 
         return result;
     }
-
-    public int getId(User user){
-        String sql = SQL_Queries.GET_USER_ID;
-        User newUser = new User();
-        String email = user.getEmail();
-        try{
-            Connection connection = DBManager.getInstance().getConnection();
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,email);
-            ResultSet rs= ps.executeQuery();
-            while (rs.next()){
-                 newUser = new BuilderUser()
-                        .setId(rs.getInt("user_id"))
-                        .build();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return newUser.getId();
-    }
-
 
     public String validate(User user){
 
@@ -188,10 +165,19 @@ public class UserDAO {
 
     }
 
-//    public void deleteUser(String email) throws  SQLException{
-//        try {
-//         Connection connection  =  DBManager.getInstance().getConnection();
-//         PreparedStatement ps = connection.prepareStatement();
-//        }
-//    }
+    public void deleteUser(int id) {
+        String sql = "call DeleteUser(" + id+ ")";
+        try {
+         Connection connection  =  DBManager.getInstance().getConnection();
+         PreparedStatement ps = connection.prepareStatement(sql);
+         int update = ps.executeUpdate();
+            if (update > 0) {
+               log.debug("User was deleted successfully");
+                return;
+            }
+            connection.close();
+        }catch (SQLException e) {
+            log.error(e);
+        }
+    }
 }

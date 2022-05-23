@@ -66,9 +66,7 @@ public class CommandFactory {
 
     public Command getCommand(HttpServletRequest request)  {
         String action =  request.getParameter("action");
-//        if(action == null || !commandMap.containsKey(action)){
-//            return new ErrorCommand();
-//        }
+//
         return commandMap.get(action);
     }
 

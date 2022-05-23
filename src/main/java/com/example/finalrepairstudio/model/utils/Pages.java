@@ -20,5 +20,8 @@ public class Pages {
     public final static String HOMEPAGE ="index.jsp";
     public final static String loginPage = "/WEB-INF/view/login.jsp";
     public final static String REGISTERPAGE = "/WEB-INF/view/register.jsp";
-    public final static String ERRORPAGE = "/WEB-INF/error-page.jsp";
+
+    public static String getPath(String s){
+        return s;
+    }
 }

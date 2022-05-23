@@ -28,8 +28,6 @@ public class AddToOrderCommand implements Command {
         String change =  request.getParameter("change-glass");
         String polish = request.getParameter("polish-glass");
 
-        System.out.println(description + "fswdfhksudfhksd");
-
         List<String> list = new ArrayList<>();
         if(description != null){
         list.add(description);

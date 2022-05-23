@@ -31,7 +31,6 @@ public class Master {
      public String getRole() {
           return role;
      }
-
      public String getPassword() {
           return password;
      }
