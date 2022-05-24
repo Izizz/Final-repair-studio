@@ -34,6 +34,6 @@ public class FeedbackCommand implements Command {
             log.error("Feedback error");
         }
 
-        return ORDERPAGE;
+        return "redirect:controller?action=user-orders";
     }
 }

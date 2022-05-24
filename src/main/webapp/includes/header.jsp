@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ex" uri="WEB-INF/tlds/mytags.tld" %>
 
 
 <fmt:requestEncoding value="UTF-8" />
@@ -15,7 +16,6 @@
     <a href="controller?action=home" class="logo"><fmt:message key="repair.studio" bundle="${lang}"/> </a>
     <a href="controller?action=change-language&locale=uk">UKR</a>
     <a href="controller?action=change-language&locale=en">En</a>
-
     <div class="header-right">
         <% if (session.getAttribute("role") != null){%>
 

@@ -4,6 +4,7 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="com.example.finalrepairstudio.model.utils.SQL_Queries" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="ex" uri="WEB-INF/tlds/mytags.tld"%>
 <!DOCTYPE html>
 <%@include file="/includes/header.jsp"%>
 <html>
@@ -16,7 +17,7 @@
     }
 </style>
 <head>
-    <title>RepairStudio</title>
+    <title><ex:Hello/></title>
 </head>
 <body>
 <%--<%@include file="/includes/header.jsp" %>--%>

@@ -21,6 +21,7 @@ public class UserSQLTest {
         }
 
     }
+
     @Test
     public  void registerTest() {
         UserDAO userDAO = new UserDAO();
@@ -58,7 +59,6 @@ public class UserSQLTest {
             e.printStackTrace();
         }
     }
-
 
     @Test
     public void getBalanceTest (){

@@ -57,7 +57,7 @@
                         <td> <c:out value="${order.requestDate}"/></td>
                         <td> <c:out value="${order.feedback}"/></td>
                         <td>
-                            <c:if test="${order.status != 'Done' && order.status != 'Deny'  }">
+                            <c:if test="${order.status != 'Done' && order.status != 'Deny' && order.status != 'Waiting.to.pay' }">
                                 <form action="controller?action=master-manage&id=${order.requestId}" method="post">
                                                     <select name="status" id="status">
                                                         <option selected disabled> <fmt:message key="set.status" bundle="${lang}"/></option>--%>

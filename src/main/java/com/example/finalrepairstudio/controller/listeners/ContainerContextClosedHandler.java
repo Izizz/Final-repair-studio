@@ -10,13 +10,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
-@WebListener // register it as you wish
+@WebListener
 public class ContainerContextClosedHandler implements ServletContextListener {
     private static final Logger log = Logger.getLogger(ContainerContextClosedHandler.class);
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        // nothing to do
+
     }
 
     @Override
@@ -26,14 +26,13 @@ public class ContainerContextClosedHandler implements ServletContextListener {
 
         Driver driver;
 
-        // clear drivers
+
         while(drivers.hasMoreElements()) {
             try {
                 driver = drivers.nextElement();
                 DriverManager.deregisterDriver(driver);
-
             } catch (SQLException ex) {
-                // deregistration failed, might want to do something, log at the very least
+
             }
         }
 

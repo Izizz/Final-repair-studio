@@ -35,10 +35,7 @@ public class BuilderOrderRequest {
         return this;
     }
 
-    public BuilderOrderRequest setDenied(Boolean denied) {
-        orderRequest.isDenied = denied;
-        return this;
-    }
+
     public BuilderOrderRequest setPrice(double price) {
         orderRequest.price = price;
         return this;

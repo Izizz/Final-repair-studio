@@ -1,7 +1,10 @@
 package com.example.finalrepairstudio.model.utils;
 
-
-
+/**
+ * SQL Queries constants for DAO classes.
+ *
+ * @author Ostap Semotiuk.
+ */
 
 public class SQL_Queries {
     //masters
@@ -20,7 +23,7 @@ public class SQL_Queries {
     public static final String SHOW_FILTERED_ORDERS = "select  * FROM orders WHERE ";
     public static final String UPDATE_ORDER = "UPDATE orders SET price = ?, master = ?, status = ? WHERE id = ?";
     public static final String SHOW_USERS_ORDERS = "select  * from orders where user_id =";
-    public static final String SHOW_MASTER_ORDERS = "SELECT S * FROM orders right join feedbacks on feedbacks.order_id=orders.id WHERE master=";
+    public static final String SHOW_MASTER_ORDERS = "SELECT  * FROM orders right join feedbacks on feedbacks.order_id=orders.id WHERE master=";
     public static final String UPDATE_STATUS = "UPDATE orders SET status = ? WHERE id = ?";
     public static final String ADD_ORDER = "insert into orders (user_id,description,price,master,status,date) values (?,?,?,?,?,?)";
     public static final String ADD_FEEDBACK = "update feedbacks set feedback = ? where order_id = ?";

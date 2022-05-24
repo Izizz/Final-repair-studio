@@ -14,22 +14,22 @@ import java.io.IOException;
 
 @WebFilter(filterName = "LocaleFilter ", urlPatterns = "/*")
 public class LocaleFilter implements Filter {
-    private static final Logger log  = Logger.getLogger(String.valueOf(LocaleFilter.class));
+   // private static final Logger log  = Logger.getLogger(String.valueOf(LocaleFilter.class));
 
     @Override
     public void destroy(){
-        log.debug("Locale filter destruction starts");
-        log.debug("Locale filter destruction finished");
+       // log.debug("Locale filter destruction starts");
+       // log.debug("Locale filter destruction finished");
     }
 
     @Override
     public void init(FilterConfig config){
-        log.debug("Locale filter initialization starts");
-        log.debug("Locale filter initialization finished");
+       // log.debug("Locale filter initialization starts");
+       // log.debug("Locale filter initialization finished");
     }
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        log.debug("Locale filter starts");
+       // log.debug("Locale filter starts");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
 
@@ -42,7 +42,7 @@ public class LocaleFilter implements Filter {
         else if (session.getAttribute("lang")==null){
             session.setAttribute("lang",defaultLocale);
         }
-        log.debug("Locale filter finished");
+       // log.debug("Locale filter finished");
         filterChain.doFilter(servletRequest,servletResponse);
     }
 }

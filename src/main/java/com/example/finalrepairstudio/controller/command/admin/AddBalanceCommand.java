@@ -18,8 +18,6 @@ public class AddBalanceCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         int user_id = Integer.parseInt(request.getParameter("id"));
 
-
-
         UserDAO userDAO = new UserDAO();
         try {
             String bal = ""+request.getParameter("balanceToAdd");
@@ -28,7 +26,6 @@ public class AddBalanceCommand implements Command {
                 balanceToAdd = Double.parseDouble(bal);
                 userDAO.TopupBalance(user_id,balanceToAdd);
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();

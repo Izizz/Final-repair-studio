@@ -1,9 +1,13 @@
 package com.example.finalrepairstudio.model.utils;
+/**
+ * Pages constants for Command pattern class.
+ *
+ * @author Ostap Semotiuk.
+ */
 
 public class Pages {
     //admin section
     public final static String ADMINPAGE = "/WEB-INF/view/admin/admin-menu.jsp";
-    public final static String MASTERLIST = "/WEB-INF/view/admin/masters.jsp";
     public final static String REQUESTLIST = "/WEB-INF/view/admin/orders.jsp";
     public final static String MANAGEORDER = "/WEB-INF/view/admin/edit-order.jsp";
     public final static String USERBALANCE = "/WEB-INF/view/admin/user-balance.jsp";

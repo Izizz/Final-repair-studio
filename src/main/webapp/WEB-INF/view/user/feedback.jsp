@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
-<%@include file="/includes/header.jsp"%>
+
 <fmt:requestEncoding value="UTF-8" />
 <fmt:setLocale value="${sessionScope.lang}" />
 <fmt:setBundle basename="messages" var="lang"/>

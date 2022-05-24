@@ -23,7 +23,6 @@ public class LoginCommand implements Command {
         String password = request.getParameter("password");
         UserDAO userDAO = new UserDAO();
 
-
         String path = null;
         User user = new BuilderUser()
                 .setEmail(email)
@@ -38,14 +37,14 @@ public class LoginCommand implements Command {
                 case "Admin": {
                     HttpSession session = request.getSession();
 
-                   // session.setAttribute("Admin", email);
+
                     session.setAttribute("role",newUser.getRole());
                     session.setAttribute("id",newUser.getId());
                     session.setAttribute("lastname",newUser.getLastname());
                     session.setAttribute("email",newUser.getEmail());
                     session.setAttribute("phone",newUser.getPhonenumber());
                     session.setAttribute("firstname",newUser.getFirstname());
-                    System.out.println(newUser.getRole());
+
 
                     return  "redirect:controller?action=home";
 
@@ -53,7 +52,7 @@ public class LoginCommand implements Command {
                 case "Master": {
                     HttpSession session = request.getSession();
 
-                   // session.setAttribute("Master", email);
+
                     session.setAttribute("role", newUser.getRole());
                     session.setAttribute("firstname",newUser.getFirstname());
                     session.setAttribute("id",newUser.getId());
@@ -61,7 +60,6 @@ public class LoginCommand implements Command {
                     session.setAttribute("email",newUser.getEmail());
                     session.setAttribute("phone",newUser.getPhonenumber());
 
-                    System.out.println(newUser.getRole());
 
                     return "redirect:controller?action=home";
 
@@ -70,7 +68,7 @@ public class LoginCommand implements Command {
                     double balance = userDAO.getBalance(newUser.getId());
                     HttpSession session = request.getSession();
 
-                   // session.setAttribute("User", email);
+
                     session.setAttribute("role",newUser.getRole());
                     session.setAttribute("firstname",newUser.getFirstname());
                     session.setAttribute("id",newUser.getId());
@@ -78,16 +76,11 @@ public class LoginCommand implements Command {
                     session.setAttribute("email",newUser.getEmail());
                     session.setAttribute("phone",newUser.getPhonenumber());
                     session.setAttribute("balance",balance);
-                    System.out.println(newUser.getRole());
                     return   "redirect:controller?action=home";
-
                 }
                 default:
-                    System.out.println("Error message = " + userValidate);
                     request.setAttribute("errMessage", userValidate);
-
                     return loginPage;
-
             }
 
 

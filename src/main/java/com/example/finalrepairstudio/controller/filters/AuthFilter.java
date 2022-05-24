@@ -15,7 +15,7 @@ import java.util.*;
  */
 @WebFilter("/controller")
 public class AuthFilter implements Filter {
-    private static final Logger log  = Logger.getLogger(String.valueOf(AuthFilter.class));
+    //private static final Logger log  = Logger.getLogger(String.valueOf(AuthFilter.class));
     private HttpServletRequest httpRequest;
     private static final ArrayList<String> common = new ArrayList<>(Arrays.asList("login","logout","home","registerpage","register","change-language","choice"));
     private static final ArrayList<String> adminRequiredURLs = new ArrayList<>(Arrays.asList("admin-",  "admin-orders",  "admin-manage",  "admin-update","user-makeorder", "admin-user-balance",  "admin-add-balance"));
@@ -46,7 +46,7 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
-        log.debug("Auth filter starts");
+     //   log.debug("Auth filter starts");
         httpRequest = (HttpServletRequest) servletRequest;
 
         HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -71,18 +71,18 @@ public class AuthFilter implements Filter {
         } else {
             response.sendRedirect("controller?action=home");
         }
-        log.debug("Auth filter finished");
+       // log.debug("Auth filter finished");
     }
     public AuthFilter() {
     }
 
     public void destroy() {
-        log.debug("Auth filter destroyed");
+        //log.debug("Auth filter destroyed");
     }
 
     public void init(FilterConfig fConfig) throws ServletException {
-        log.debug("Auth filter initialized start");
-        log.debug("Auth filter initialized finish");
+       // log.debug("Auth filter initialized start");
+        //log.debug("Auth filter initialized finish");
     }
 
 

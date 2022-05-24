@@ -14,16 +14,12 @@ public class OrderRequest {
      double price;
      String feedback;
 
-
-
-
     public String getFeedback() {
         return feedback;
     }
 
     Date requestDate;
 
-     Boolean isDenied;
      String status;
     public double getPrice() {
         return price;
@@ -46,9 +42,7 @@ public class OrderRequest {
     public Date getRequestDate() {
         return requestDate;
     }
-    public Boolean getDenied() {
-        return isDenied;
-    }
+
 
 
 

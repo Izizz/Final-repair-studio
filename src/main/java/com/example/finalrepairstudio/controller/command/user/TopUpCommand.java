@@ -26,7 +26,6 @@ public class TopUpCommand implements Command {
         int id = (int) session.getAttribute("id");
 
         double balance = Double.parseDouble(request.getParameter("balanceToAdd"));
-        System.out.println(balance+ " This is balance to add");
         UserDAO userDao = new UserDAO();
         OrderDAO orderDAO  = new OrderDAO();
         try {
